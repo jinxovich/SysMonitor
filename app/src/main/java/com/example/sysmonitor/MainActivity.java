@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeViews() {
         // Device Info
         cardDevice = findViewById(R.id.cardDevice);
-        cardSensors = findViewById(R.id.cardSensors); // Находим кнопку сенсоров
+        cardSensors = findViewById(R.id.cardSensors);
         textModel = findViewById(R.id.textModel);
         textCpu = findViewById(R.id.textCpu);
         textCpuFreq = findViewById(R.id.textCpuFreq);
@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupInteractions() {
-        // 1. Открытие настроек устройства
         cardDevice.setOnClickListener(v -> {
             try {
                 startActivity(new Intent(Settings.ACTION_DEVICE_INFO_SETTINGS));
@@ -128,12 +127,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 2. Открытие экрана сенсоров
         cardSensors.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, SensorActivity.class));
         });
 
-        // 3. Кнопка очистки RAM
         btnCleanRam.setOnClickListener(v -> {
             cleanRamMemory();
         });
@@ -175,14 +172,12 @@ public class MainActivity extends AppCompatActivity {
 
         new Thread(() -> {
             String cpuName;
-            // Новый метод для Android 12+ (как у тебя)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 cpuName = Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL;
             } else {
                 cpuName = getCpuNameLegacy();
             }
 
-            // Если всё ещё пусто, берем Hardware
             if (cpuName.contains("null") || cpuName.trim().isEmpty()) {
                 cpuName = Build.HARDWARE;
             }
