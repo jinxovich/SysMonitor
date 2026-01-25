@@ -10,8 +10,7 @@
 
 | **Главный экран** | **Датчики (Sensors)** |
 |:---:|:---:|
-| <img src="https://via.placeholder.com/300x600?text=Главный+Экран" width="250" /> | <img src="https://via.placeholder.com/300x600?text=Датчики" width="250" /> |
-<!-- Замени ссылки выше на реальные пути к картинкам, например: screenshots/main.png -->
+| <img src="screenshots/main.jpg" width="250" /> | <img src="screenshots/sensors.jpg" width="250" /> |<!-- Замени ссылки выше на реальные пути к картинкам, например: screenshots/main.png -->
 
 ---
 
