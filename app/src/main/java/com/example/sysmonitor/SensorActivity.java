@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
@@ -27,9 +28,21 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         valLight = findViewById(R.id.valLight);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
         if (sensorManager != null) {
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
             lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+            if (accelerometer == null) {
+                valX.setText("N/A");
+                valY.setText("N/A");
+                valZ.setText("N/A");
+                Toast.makeText(this, "No Accelerometer detected", Toast.LENGTH_SHORT).show();
+            }
+
+            if (lightSensor == null) {
+                valLight.setText("N/A");
+            }
         }
     }
 
@@ -37,8 +50,12 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     protected void onResume() {
         super.onResume();
         if (sensorManager != null) {
-            if (accelerometer != null) sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-            if (lightSensor != null) sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_UI);
+            if (accelerometer != null) {
+                sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+            }
+            if (lightSensor != null) {
+                sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_UI);
+            }
         }
     }
 
