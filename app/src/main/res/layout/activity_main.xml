@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ЗАМЕНА ScrollView на NestedScrollView (Feedback #4) -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -42,7 +41,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:text="DEVICE INFO (TAP TO OPEN SETTINGS)"
+                    android:text="DEVICE INFO"
                     android:textColor="#BB86FC"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -76,6 +75,21 @@
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+                <!-- НОВАЯ КНОПКА ДЛЯ ДЕТАЛЕЙ -->
+                <TextView
+                    android:id="@+id/btnDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[ VIEW CORES &amp; THERMAL ]"
+                    android:textColor="#E040FB"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="12dp"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -116,6 +130,7 @@
                         android:textSize="12sp"
                         android:layout_alignParentEnd="true"
                         android:clickable="true"
+                        android:padding="4dp"
                         android:foreground="?android:attr/selectableItemBackground"/>
                 </RelativeLayout>
 
@@ -258,7 +273,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- CARD 5: SENSOR BUTTON (ИСПРАВЛЕНО) -->
+        <!-- CARD 5: SENSOR BUTTON -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSensors"
             android:layout_width="match_parent"
@@ -290,7 +305,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Добавлены layout_width и layout_height -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -332,7 +346,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:text="SYSTEM STATUS (TAP APP TO LAUNCH)"
+                    android:text="SYSTEM STATUS"
                     android:textColor="#FFB74D"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -350,12 +364,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <!-- Добавлено nestedScrollingEnabled="false" для плавности -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerApps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
+                    android:nestedScrollingEnabled="false"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

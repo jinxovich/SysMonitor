@@ -42,7 +42,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textModel, textCpu, textCpuFreq;
+    private TextView textModel, textCpu, textCpuFreq, btnDetails;
     private TextView textRam, btnCleanRam;
     private TextView textBattery, textBatTemp;
     private TextView textIp;
@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         textModel = findViewById(R.id.textModel);
         textCpu = findViewById(R.id.textCpu);
         textCpuFreq = findViewById(R.id.textCpuFreq);
+        btnDetails = findViewById(R.id.btnDetails); // Новая кнопка
+
         textRam = findViewById(R.id.textRam);
         btnCleanRam = findViewById(R.id.btnCleanRam);
         progressRam = findViewById(R.id.progressRam);
@@ -241,6 +243,11 @@ public class MainActivity extends AppCompatActivity {
             catch (Exception e) { startActivity(new Intent(Settings.ACTION_SETTINGS)); }
         });
 
+        // Переход на новую активность HardwareActivity
+        btnDetails.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, HardwareActivity.class));
+        });
+
         cardSensors.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SensorActivity.class)));
 
         btnCleanRam.setOnClickListener(v -> cleanRamMemory());
@@ -259,8 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     am.killBackgroundProcesses(app.packageName);
                     count++;
-                } catch (Exception e) {
-                }
+                } catch (Exception e) { }
             }
         }
 

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -14,7 +12,7 @@ import android.view.WindowManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
+import java.util.Locale;
 
 public class SystemStatsRepository {
     private static final String TAG = "SystemStatsRepo";
@@ -39,7 +37,7 @@ public class SystemStatsRepository {
                         return Long.parseLong(line.trim());
                     }
                 } catch (Exception e) {
-                    Log.w(TAG, "Error reading CPU freq from " + path, e);
+                    Log.w(TAG, "Error reading CPU freq", e);
                 }
             }
         }
@@ -82,7 +80,64 @@ public class SystemStatsRepository {
         return new BatteryInfo(pct, temp / 10.0f);
     }
 
-    // Класс-контейнер для батареи
+    public int[] getCpuCoresFreq() {
+        int[] freqs = new int[12];
+
+        for (int i = 0; i < 12; i++) {
+            String path = "/sys/devices/system/cpu/cpu" + i + "/cpufreq/scaling_cur_freq";
+            File file = new File(path);
+            if (file.exists()) {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String line = br.readLine();
+                    if (line != null) {
+                        freqs[i] = Integer.parseInt(line.trim());
+                    } else {
+                        freqs[i] = -1;
+                    }
+                } catch (Exception e) {
+                    freqs[i] = -1;
+                }
+            } else {
+                freqs[i] = -2;
+            }
+        }
+        return freqs;
+    }
+
+    public String getThermalStat() {
+        StringBuilder sb = new StringBuilder();
+        boolean foundAny = false;
+
+
+        for (int i = 0; i < 30; i++) {
+            String dirPath = "/sys/class/thermal/thermal_zone" + i;
+            File dir = new File(dirPath);
+            if (!dir.exists()) continue;
+
+            String type = "Unknown";
+            float temp = -999;
+
+            try (BufferedReader br = new BufferedReader(new FileReader(new File(dir, "type")))) {
+                type = br.readLine();
+            } catch (Exception e) {}
+
+            try (BufferedReader br = new BufferedReader(new FileReader(new File(dir, "temp")))) {
+                String line = br.readLine();
+                if (line != null) {
+                    long raw = Long.parseLong(line.trim());
+                    if (raw > 1000) temp = raw / 1000.0f;
+                    else temp = raw;
+                }
+            } catch (Exception e) {}
+
+            if (temp > -20 && temp < 150) {
+                sb.append(String.format(Locale.US, "Zone %d (%s): %.1f°C\n", i, type, temp));
+                foundAny = true;
+            }
+        }
+        return foundAny ? sb.toString() : "No accessible thermal sensors found.";
+    }
+
     public static class BatteryInfo {
         public int level;
         public float temp;

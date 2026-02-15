@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Добавлено разрешение для убийства процессов (Feedback #9) -->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -31,6 +29,9 @@
         </activity>
 
         <activity android:name=".SensorActivity" />
+
+        <!-- Добавлена новая активность -->
+        <activity android:name=".HardwareActivity" />
 
     </application>
 
