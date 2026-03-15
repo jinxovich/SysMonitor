@@ -6,7 +6,6 @@
     android:padding="12dp"
     android:gravity="center_vertical">
 
-    <!-- Иконка приложения -->
     <ImageView
         android:id="@+id/appIcon"
         android:layout_width="40dp"
@@ -18,7 +17,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Название -->
         <TextView
             android:id="@+id/appName"
             android:layout_width="wrap_content"
@@ -27,12 +25,20 @@
             android:textStyle="bold"
             android:textSize="16sp"/>
 
-        <!-- Имя пакета -->
         <TextView
             android:id="@+id/appPackage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#888888"
             android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/appStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#03DAC5"
+            android:textStyle="italic"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"/>
     </LinearLayout>
 </LinearLayout>

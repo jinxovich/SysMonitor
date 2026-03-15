@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
@@ -14,13 +15,101 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="System Intern Monitor"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_width="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- CARD 0: SYSTEM HEALTH (геймифицированная) -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"/>
+            app:cardBackgroundColor="#1E1E1E"
+            app:cardCornerRadius="12dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Заголовок -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SYSTEM HEALTH"
+                    android:textColor="#E040FB"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- Строка: уровень + процент -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <!-- Уровень (Bronze/Silver/Gold/Platinum) -->
+                    <TextView
+                        android:id="@+id/textHealthLevel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🥇 GOLD"
+                        android:textColor="#FFD54F"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <!-- Числовой процент -->
+                    <TextView
+                        android:id="@+id/textHealthScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100%"
+                        android:textColor="#4CAF50"
+                        android:textSize="28sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <!-- Полоса прогресса -->
+                <ProgressBar
+                    android:id="@+id/progressHealth"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressTint="#4CAF50"
+                    android:progressBackgroundTint="#333333"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- Описание состояния -->
+                <TextView
+                    android:id="@+id/textHealthDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Running great, keep it up!"
+                    android:textColor="#AAAAAA"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+
+                <!-- Последняя очистка -->
+                <TextView
+                    android:id="@+id/textLastClean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last clean: ..."
+                    android:textColor="#888888"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- CARD 1: DEVICE INFO -->
         <androidx.cardview.widget.CardView
@@ -41,42 +130,41 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="DEVICE INFO"
                     android:textColor="#BB86FC"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"/>
 
                 <TextView
                     android:id="@+id/textModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Model: ..."
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"/>
 
                 <TextView
                     android:id="@+id/textCpu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="CPU: ..."
                     android:textColor="#B0BEC5"
                     android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"/>
 
                 <TextView
                     android:id="@+id/textCpuFreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Freq: ..."
                     android:textColor="#03DAC5"
                     android:fontFamily="monospace"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp"/>
 
-                <!-- НОВАЯ КНОПКА ДЛЯ ДЕТАЛЕЙ -->
                 <TextView
                     android:id="@+id/btnDetails"
                     android:layout_width="wrap_content"
@@ -136,10 +224,10 @@
 
                 <TextView
                     android:id="@+id/textRam"
-                    android:text="RAM: ..."
-                    android:textColor="#FFFFFF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="RAM: ..."
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:layout_marginBottom="4dp"/>
 
@@ -160,21 +248,21 @@
 
                     <TextView
                         android:id="@+id/textBattery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Battery: ..."
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/textBatTemp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Temp: --°C"
                         android:textColor="#FFB74D"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <ProgressBar
@@ -202,21 +290,21 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="NETWORK"
                     android:textColor="#8BC34A"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="12dp"/>
 
                 <TextView
                     android:id="@+id/textIp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="IP Address: ..."
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:fontFamily="monospace"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -236,21 +324,21 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="DISK &amp; OS"
                     android:textColor="#81D4FA"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="12dp"/>
 
                 <TextView
                     android:id="@+id/textStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Storage: ..."
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"/>
 
                 <ProgressBar
@@ -264,16 +352,66 @@
 
                 <TextView
                     android:id="@+id/textRoot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Checking..."
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
+                    android:textSize="14sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- CARD 5: SENSOR BUTTON -->
+        <!-- CARD: HYGIENE -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHygiene"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#2C2C2C"
+            app:cardCornerRadius="12dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DEVICE HYGIENE SCANNER"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Find large &amp; residual files"
+                        android:textColor="#888888"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCAN >"
+                    android:textColor="#03DAC5"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 5: SENSORS -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSensors"
             android:layout_width="match_parent"
@@ -293,11 +431,11 @@
                 android:padding="16dp">
 
                 <ImageView
-                    android:src="@android:drawable/ic_menu_compass"
-                    app:tint="#E040FB"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"/>
+                    android:src="@android:drawable/ic_menu_compass"
+                    android:layout_marginEnd="16dp"
+                    app:tint="#E040FB"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -328,7 +466,6 @@
                     android:textColor="#E040FB"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -346,30 +483,29 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:text="SYSTEM STATUS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="APP USAGE (LAST 24H)"
                     android:textColor="#FFB74D"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"/>
 
                 <TextView
                     android:id="@+id/textUptime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Uptime: ..."
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:fontFamily="monospace"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="12dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerApps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"/>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
